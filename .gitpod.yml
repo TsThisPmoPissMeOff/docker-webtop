@@ -1,0 +1,19 @@
+image: gitpod/workspace-full
+
+tasks:
+  - name: Run Webtop
+    init: |
+      docker pull lscr.io/linuxserver/webtop:latest
+    command: |
+      docker run -d \
+        --name=webtop \
+        -e PUID=1000 \
+        -e PGID=1000 \
+        -e TZ=Etc/UTC \
+        -p 3001:3001 \
+        -v /workspace/config:/config \
+        lscr.io/linuxserver/webtop:latest
+
+ports:
+  - port: 3001
+    onOpen: open-browser
